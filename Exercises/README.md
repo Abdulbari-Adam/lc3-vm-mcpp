@@ -1,6 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/Xu7g1ebr)
 # Programming Studio 2 (COSC2804) - Assignment 2
-**Student number:** \*\*\*Please place your student number here\*\*\*
+**Student number:** \*\*\*S4054246\*\*\*
 
 This is the README file for Assignment 2 in Programming Studio 2 (COSC2804).
 
@@ -12,3 +12,4 @@ To test an assembly program:
 * Launch a Spigot server and join it, per the [instructions on Canvas](https://rmit.instructure.com/courses/134943/pages/getting-started-with-minecraft++-and-elci?module_item_id=6066599).
 * Assemble the .asm file via laser.
 * Run `./lc3 program_name.obj`.
+

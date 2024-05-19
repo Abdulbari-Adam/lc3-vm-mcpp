@@ -1,0 +1,46 @@
+  ADDR  |  HEX  |      BINARY      |  LN  |  ASSEMBLY
+        |       |                  |    1 | .ORIG x3000
+        |       |                  |    2 | 
+        |       |                  |    3 | ; Initialize player position
+ x3000  | xF031 | 1111000000110001 |    4 | TRAP 0x31          ; Get player position
+ x3001  | x3012 | 0011000000010010 |    5 | ST R0, PLAY_X
+ x3002  | x3212 | 0011001000010010 |    6 | ST R1, PLAY_Y
+ x3003  | x3412 | 0011010000010010 |    7 | ST R2, PLAY_Z
+        |       |                  |    8 | 
+ x3004  | x2A13 | 0010101000010011 |    9 | LD R5, STEP_COUNT  ; Load the number of steps
+ x3005  | x2611 | 0010011000010001 |   10 | LD R3, BLOCK       ; Load block value
+        |       |                  |   11 | 
+        |       |                  |   12 | ; Initialize positions
+ x3006  | x200D | 0010000000001101 |   13 | LD R0, PLAY_X
+ x3007  | x1021 | 0001000000100001 |   14 | ADD R0, R0, #1     ; Start at (playerPos.x + 1)
+ x3008  | x220C | 0010001000001100 |   15 | LD R1, PLAY_Y
+ x3009  | x240C | 0010010000001100 |   16 | LD R2, PLAY_Z
+        |       |                  |   17 | 
+        |       |                  |   18 | STAIRS_LOOP
+ x300A  | x0406 | 0000010000000110 |   19 | BRz DONE           ; If step count is zero, we're done
+        |       |                  |   20 | 
+ x300B  | x4806 | 0100100000000110 |   21 | JSR PLACE_STEP     ; Place the current step
+        |       |                  |   22 | 
+ x300C  | x1021 | 0001000000100001 |   23 | ADD R0, R0, #1     ; Move to the next position along X
+ x300D  | x1261 | 0001001001100001 |   24 | ADD R1, R1, #1     ; Move to the next position along Y
+ x300E  | x14A1 | 0001010010100001 |   25 | ADD R2, R2, #1     ; Move to the next position along Z
+        |       |                  |   26 | 
+ x300F  | x1B7F | 0001101101111111 |   27 | ADD R5, R5, #-1    ; Decrement step count
+ x3010  | x0FF9 | 0000111111111001 |   28 | BR STAIRS_LOOP     ; Repeat for the next step
+        |       |                  |   29 | 
+        |       |                  |   30 | DONE
+ x3011  | xF025 | 1111000000100101 |   31 | HALT               ; Halt the program
+        |       |                  |   32 | 
+        |       |                  |   33 | ; Subroutine to place a step
+        |       |                  |   34 | PLACE_STEP
+ x3012  | xF034 | 1111000000110100 |   35 | TRAP 0x34          ; Set block at current position
+ x3013  | xC1C0 | 1100000111000000 |   36 | RET                ; Return from subroutine
+        |       |                  |   37 | 
+        |       |                  |   38 | ; Data definitions
+ x3014  | x0000 | 0000000000000000 |   39 | PLAY_X .BLKW 1
+ x3015  | x0000 | 0000000000000000 |   40 | PLAY_Y .BLKW 1
+ x3016  | x0000 | 0000000000000000 |   41 | PLAY_Z .BLKW 1
+ x3017  | x000E | 0000000000001110 |   42 | BLOCK  .FILL #14   ; Block ID for the stairs
+ x3018  | x000A | 0000000000001010 |   43 | STEP_COUNT .FILL #10 ; Number of steps
+        |       |                  |   44 | 
+        |       |                  |   45 | .END

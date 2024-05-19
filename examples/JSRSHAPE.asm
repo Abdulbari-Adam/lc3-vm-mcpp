@@ -1,0 +1,68 @@
+
+.ORIG x3000
+TRAP 0x31 ; Store the player's tile position in R0, R1, R2
+LD R4, X
+LD R5, Y
+JSR FRONT
+JSR NEXT 
+JSR BEHIND 
+;ADD R3, R3, #10
+;ST R3, TEMP 
+
+
+HALT
+X .FILL #5
+Y .FILL #2
+count .FILL #10
+;TEMP .FILL #0
+
+FRONT 
+LD R6, count
+LOOP
+BRz END
+ADD R0, R0, #1
+
+
+ADD R3, R4, R5 
+TRAP 0x34 ; Set block
+ADD R6, R6, #-1
+BR LOOP
+END 
+RET 
+
+
+NEXT
+
+
+LD R6, count
+LOOP2
+BRz END2
+ADD R2, R2, #1
+
+
+ADD R3, R4, R5 
+TRAP 0x34 ; Set block
+ADD R6, R6, #-1
+BR LOOP2
+END2 
+RET 
+
+
+BEHIND
+
+
+LD R6, count
+LOOP3
+BRz END3
+ADD R0, R0, #-1
+
+
+ADD R3, R4, R5 
+TRAP 0x34 ; Set block
+ADD R6, R6, #-1
+BR LOOP3
+END3 
+RET 
+
+
+.END

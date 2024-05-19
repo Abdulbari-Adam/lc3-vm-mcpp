@@ -1,0 +1,11 @@
+LOOP                                                                       x300B
+IS_ZERO                                                                    x3011
+SET_BLOCK                                                                  x3013
+DONE                                                                       x301D
+PLAYER_X                                                                   x301E
+PLAYER_Y                                                                   x301F
+PLAYER_Z                                                                   x3020
+NUMBER_TO_CONVERT                                                          x3021
+BIT_MASK                                                                   x3022
+BLOCK_STONE                                                                x3023
+BLOCK_AIR                                                                  x3024

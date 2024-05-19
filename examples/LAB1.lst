@@ -1,0 +1,82 @@
+  ADDR  |  HEX  |      BINARY      |  LN  |  ASSEMBLY
+        |       |                  |    1 | .ORIG x3000
+        |       |                  |    2 | 
+        |       |                  |    3 | ; Load initial block type
+ x3000  | x262B | 0010011000101011 |    4 | LD R3, BLOCK
+        |       |                  |    5 | 
+        |       |                  |    6 | ; Initialize registers
+ x3001  | x5020 | 0101000000100000 |    7 | AND R0, R0, #0
+ x3002  | x5260 | 0101001001100000 |    8 | AND R1, R1, #0
+ x3003  | x54A0 | 0101010010100000 |    9 | AND R2, R2, #0
+        |       |                  |   10 | 
+        |       |                  |   11 | ; Get player's current position
+ x3004  | xF031 | 1111000000110001 |   12 | TRAP 0x31
+        |       |                  |   13 | 
+        |       |                  |   14 | ; Load count value
+ x3005  | x2C24 | 0010110000100100 |   15 | LD R6, COUNT
+        |       |                  |   16 | 
+        |       |                  |   17 | ; Draw the "+" design
+ x3006  | x4804 | 0100100000000100 |   18 | JSR FRONT
+ x3007  | x480A | 0100100000001010 |   19 | JSR BACK
+ x3008  | x4811 | 0100100000010001 |   20 | JSR LEFT
+ x3009  | x4818 | 0100100000011000 |   21 | JSR RIGHT
+        |       |                  |   22 | 
+        |       |                  |   23 | ; Halt the program
+ x300A  | xF025 | 1111000000100101 |   24 | HALT
+        |       |                  |   25 | 
+        |       |                  |   26 | ; Subroutine to draw blocks in the front direction
+        |       |                  |   27 | FRONT
+ x300B  | x0405 | 0000010000000101 |   28 | BRz XPOS_F
+ x300C  | x16E0 | 0001011011100000 |   29 | ADD R3, R3, #0
+ x300D  | x1021 | 0001000000100001 |   30 | ADD R0, R0, #1
+ x300E  | xF034 | 1111000000110100 |   31 | TRAP 0x34
+ x300F  | x1DBF | 0001110110111111 |   32 | ADD R6, R6, #-1
+ x3010  | x0FFA | 0000111111111010 |   33 | BR FRONT
+        |       |                  |   34 | XPOS_F
+ x3011  | xC1C0 | 1100000111000000 |   35 | RET
+        |       |                  |   36 | 
+        |       |                  |   37 | ; Subroutine to draw blocks in the back direction
+        |       |                  |   38 | BACK
+ x3012  | x2C18 | 0010110000011000 |   39 | LD R6, COUNTB
+        |       |                  |   40 | LOOP_B
+ x3013  | x0405 | 0000010000000101 |   41 | BRz XPOS_B
+ x3014  | x16E0 | 0001011011100000 |   42 | ADD R3, R3, #0
+ x3015  | x103F | 0001000000111111 |   43 | ADD R0, R0, #-1
+ x3016  | xF034 | 1111000000110100 |   44 | TRAP 0x34
+ x3017  | x1DBF | 0001110110111111 |   45 | ADD R6, R6, #-1
+ x3018  | x0FFA | 0000111111111010 |   46 | BR LOOP_B
+        |       |                  |   47 | XPOS_B
+ x3019  | xC1C0 | 1100000111000000 |   48 | RET
+        |       |                  |   49 | 
+        |       |                  |   50 | ; Subroutine to draw blocks in the left direction
+        |       |                  |   51 | LEFT
+ x301A  | x2C0F | 0010110000001111 |   52 | LD R6, COUNT
+        |       |                  |   53 | LOOP_L
+ x301B  | x0405 | 0000010000000101 |   54 | BRz XPOS_L
+ x301C  | x16E0 | 0001011011100000 |   55 | ADD R3, R3, #0
+ x301D  | x14BF | 0001010010111111 |   56 | ADD R2, R2, #-1
+ x301E  | xF034 | 1111000000110100 |   57 | TRAP 0x34
+ x301F  | x1DBF | 0001110110111111 |   58 | ADD R6, R6, #-1
+ x3020  | x0FFA | 0000111111111010 |   59 | BR LOOP_L
+        |       |                  |   60 | XPOS_L
+ x3021  | xC1C0 | 1100000111000000 |   61 | RET
+        |       |                  |   62 | 
+        |       |                  |   63 | ; Subroutine to draw blocks in the right direction
+        |       |                  |   64 | RIGHT
+ x3022  | x2C07 | 0010110000000111 |   65 | LD R6, COUNT
+        |       |                  |   66 | LOOP_R
+ x3023  | x0405 | 0000010000000101 |   67 | BRz XPOS_R
+ x3024  | x16E0 | 0001011011100000 |   68 | ADD R3, R3, #0
+ x3025  | x14A1 | 0001010010100001 |   69 | ADD R2, R2, #1
+ x3026  | xF034 | 1111000000110100 |   70 | TRAP 0x34
+ x3027  | x1DBF | 0001110110111111 |   71 | ADD R6, R6, #-1
+ x3028  | x0FFA | 0000111111111010 |   72 | BR LOOP_R
+        |       |                  |   73 | XPOS_R
+ x3029  | xC1C0 | 1100000111000000 |   74 | RET
+        |       |                  |   75 | 
+        |       |                  |   76 | ; Data
+ x302A  | x000A | 0000000000001010 |   77 | COUNT .FILL #10
+ x302B  | x000A | 0000000000001010 |   78 | COUNTB .FILL #10 
+ x302C  | x0001 | 0000000000000001 |   79 | BLOCK .FILL #1
+        |       |                  |   80 | 
+        |       |                  |   81 | .END

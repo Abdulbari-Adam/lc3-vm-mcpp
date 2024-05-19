@@ -4,8 +4,7 @@ minusgz                                                                    x3016
 absx                                                                       x301F
 absy                                                                       x3023
 absz                                                                       x3027
-OUT_BOUND                                                                  x3033
-IN_BOUND                                                                   x3036
+OUT_BOUND                                                                  x3034
 OPT_ONE                                                                    x3037
 OPT_TWO                                                                    x306B
 G_X                                                                        x3091

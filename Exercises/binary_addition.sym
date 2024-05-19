@@ -1,0 +1,7 @@
+COUNT                                                                      x300A
+PLAYER_X                                                                   x300B
+PLAYER_Y                                                                   x300C
+PLAYER_Z                                                                   x300D
+BLOCK_X                                                                    x300E
+BLOCK_Y                                                                    x300F
+BLOCK_Z                                                                    x3010
