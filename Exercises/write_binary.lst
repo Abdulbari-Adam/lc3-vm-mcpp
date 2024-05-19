@@ -24,42 +24,41 @@
         |       |                  |   23 | ; begin the looping 
         |       |                  |   24 | LOOP
  x300B  | x0411 | 0000010000010001 |   25 | BRz DONE ; if R3 is zero all bits have been accounted for 
-        |       |                  |   26 | 
- x300C  | x57C4 | 0101011111000100 |   27 | AND R3,R7,R4
- x300D  | x0403 | 0000010000000011 |   28 | BRz IS_ZERO
-        |       |                  |   29 | 
- x300E  | x56E0 | 0101011011100000 |   30 | AND R3,R3,#0
- x300F  | x2613 | 0010011000010011 |   31 | LD R3, BLOCK_STONE
- x3010  | x0E02 | 0000111000000010 |   32 | BRnzp SET_BLOCK
-        |       |                  |   33 | 
-        |       |                  |   34 | IS_ZERO
- x3011  | x56E0 | 0101011011100000 |   35 | AND R3,R3,#0
- x3012  | x2611 | 0010011000010001 |   36 | LD R3, BLOCK_AIR
-        |       |                  |   37 | 
-        |       |                  |   38 | SET_BLOCK
- x3013  | x200A | 0010000000001010 |   39 | LD R0,PLAYER_X
- x3014  | x1005 | 0001000000000101 |   40 | ADD R0,R0,R5
- x3015  | x2209 | 0010001000001001 |   41 | LD R1,PLAYER_Y
- x3016  | x2409 | 0010010000001001 |   42 | LD R2,PLAYER_Z
- x3017  | xF034 | 1111000000110100 |   43 | TRAP 0x34
+ x300C  | x57C4 | 0101011111000100 |   26 | AND R3,R7,R4
+ x300D  | x0403 | 0000010000000011 |   27 | BRz IS_ZERO
+        |       |                  |   28 | 
+ x300E  | x56E0 | 0101011011100000 |   29 | AND R3,R3,#0
+ x300F  | x2613 | 0010011000010011 |   30 | LD R3, BLOCK_STONE
+ x3010  | x0E02 | 0000111000000010 |   31 | BRnzp SET_BLOCK
+        |       |                  |   32 | 
+        |       |                  |   33 | IS_ZERO
+ x3011  | x56E0 | 0101011011100000 |   34 | AND R3,R3,#0
+ x3012  | x2611 | 0010011000010001 |   35 | LD R3, BLOCK_AIR
+        |       |                  |   36 | 
+        |       |                  |   37 | SET_BLOCK
+ x3013  | x200A | 0010000000001010 |   38 | LD R0,PLAYER_X
+ x3014  | x1005 | 0001000000000101 |   39 | ADD R0,R0,R5
+ x3015  | x2209 | 0010001000001001 |   40 | LD R1,PLAYER_Y
+ x3016  | x2409 | 0010010000001001 |   41 | LD R2,PLAYER_Z
+ x3017  | xF034 | 1111000000110100 |   42 | TRAP 0x34
+        |       |                  |   43 | 
         |       |                  |   44 | 
-        |       |                  |   45 | 
- x3018  | x1FC7 | 0001111111000111 |   46 | ADD R7,R7,R7
- x3019  | x1B61 | 0001101101100001 |   47 | ADD R5,R5,#1 ; increment R5 by one so the next block is 2 to the right and so on
- x301A  | x1DBF | 0001110110111111 |   48 | ADD R6,R6,#-1 ; decrement the 16 bit holder until it reaches 0
- x301B  | xF036 | 1111000000110110 |   49 | TRAP 0x36
- x301C  | x0FEE | 0000111111101110 |   50 | BRnzp LOOP
-        |       |                  |   51 | 
-        |       |                  |   52 | DONE
- x301D  | xF025 | 1111000000100101 |   53 | HALT
- x301E  | x0000 | 0000000000000000 |   54 | PLAYER_X .BLKW 1
- x301F  | x0000 | 0000000000000000 |   55 | PLAYER_Y .BLKW 1
- x3020  | x0000 | 0000000000000000 |   56 | PLAYER_Z .BLKW 1
- x3021  | x00E5 | 0000000011100101 |   57 | NUMBER_TO_CONVERT .FILL #229 ; Note: Please do not change the name of this constant
- x3022  | x0001 | 0000000000000001 |   58 | BIT_MASK         .FILL x0001   ; Initial bit mask (1000 0000 0000 0000)
- x3023  | x0001 | 0000000000000001 |   59 | BLOCK_STONE      .FILL #1      ; Block ID for stone
- x3024  | x0000 | 0000000000000000 |   60 | BLOCK_AIR        .FILL #0      ; Block ID for air
-        |       |                  |   61 | .END
+ x3018  | x1FC7 | 0001111111000111 |   45 | ADD R7,R7,R7
+ x3019  | x1B61 | 0001101101100001 |   46 | ADD R5,R5,#1 ; increment R5 by one so the next block is 2 to the right and so on
+ x301A  | x1DBF | 0001110110111111 |   47 | ADD R6,R6,#-1 ; decrement the 16 bit holder until it reaches 0
+ x301B  | xF036 | 1111000000110110 |   48 | TRAP 0x36
+ x301C  | x0FEE | 0000111111101110 |   49 | BRnzp LOOP
+        |       |                  |   50 | 
+        |       |                  |   51 | DONE
+ x301D  | xF025 | 1111000000100101 |   52 | HALT
+ x301E  | x0000 | 0000000000000000 |   53 | PLAYER_X .BLKW 1
+ x301F  | x0000 | 0000000000000000 |   54 | PLAYER_Y .BLKW 1
+ x3020  | x0000 | 0000000000000000 |   55 | PLAYER_Z .BLKW 1
+ x3021  | x0414 | 0000010000010100 |   56 | NUMBER_TO_CONVERT .FILL #1044 ; Note: Please do not change the name of this constant
+ x3022  | x0001 | 0000000000000001 |   57 | BIT_MASK         .FILL x0001   ; Initial bit mask (0000 0000 0000 0001)
+ x3023  | x0001 | 0000000000000001 |   58 | BLOCK_STONE      .FILL #1      ; Block ID for stone
+ x3024  | x0000 | 0000000000000000 |   59 | BLOCK_AIR        .FILL #0      ; Block ID for air
+        |       |                  |   60 | .END
+        |       |                  |   61 | 
         |       |                  |   62 | 
         |       |                  |   63 | 
-        |       |                  |   64 | 

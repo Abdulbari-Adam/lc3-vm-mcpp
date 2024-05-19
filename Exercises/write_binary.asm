@@ -53,7 +53,7 @@ HALT
 PLAYER_X .BLKW 1
 PLAYER_Y .BLKW 1
 PLAYER_Z .BLKW 1
-NUMBER_TO_CONVERT .FILL #229 ; Note: Please do not change the name of this constant
+NUMBER_TO_CONVERT .FILL #1044 ; Note: Please do not change the name of this constant
 BIT_MASK         .FILL x0001   ; Initial bit mask (0000 0000 0000 0001)
 BLOCK_STONE      .FILL #1      ; Block ID for stone
 BLOCK_AIR        .FILL #0      ; Block ID for air
