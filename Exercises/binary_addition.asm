@@ -37,8 +37,7 @@ ADD R6,R6,#1
 ADD R2,R2,#1 ; shifting this 1 more to the right.
 ADD R0,R0,#15 ;Adding another 16 so we can decrement 
 ADD R0,R0,#1
- 
- ; this loop is perfect 
+; this loop is perfect 
 LOOP1
 ADD R0,R0,#-1
 LD R1 , PLAYER_Y
@@ -55,7 +54,6 @@ TRAP 0x36
 BRnzp LOOP1
 DONE1
 TRAP 0x36
- 
 ST R4,LINE2 ;storing the first line in R4
 LD R5,LINE1 ;storing the 2nd line in R5 then adding them in R4 to convert the number and place blocks 
 ADD R4,R4,R5

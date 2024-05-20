@@ -84,7 +84,7 @@ TRAP 0x36 ;6
  ;the way i understood the inequlaity in this question was if Manhattan distance was MD and goal distance was GD
  ; then for MD to be within GD it meants that MD <= GD 
  ; for exammple if MD = 10 and GD = 15 
- ; when doing 10-15 it will give you a negative number meaning its within, however if it is greater than it is outside the bounds.
+ ; when doing 10-15 it will give you a negative number meaning its within, however if it is greater than it is outside the bounds 
 
 NOT R6, R6
 ADD R6,R6,#1
@@ -118,6 +118,5 @@ G_Y .FILL #-8
 G_Z .FILL #-12
 GOAL_DIST .FILL #265
 
-
-
 .END
+
